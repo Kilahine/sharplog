@@ -19,16 +19,32 @@ finally:
 	file.close()
 	write.close()
 
-file = open("test.csv")
+file = open("test.csv","r")
+write = open("final.csv","w")
 try:
 	reader = csv.reader(file)
 	for row in reader:
 		if (row[0] == "Impression") or (row[0]=="Copie"):
-	
-			print row
+			
+			write.write('"'+row[0]+'","' +row[1]+'","' +row[2]+'","' +row[3]+'","'+row[4] +'"\n')
 			nb=nb+int(row[3])
 			couleur=couleur+int(row[4])
 		
 finally:
+	write.write("Impression nb =" + str(nb) +" Impression couleur = " + str(couleur))
 	file.close()
-print "Impression nb =" + str(nb) +" Impression couleur = " + str(couleur)
+	write.close()
+
+file=open("final.csv","r")
+liste = []
+try:
+	reader = csv.reader(file)
+	for row in reader:
+		if str(row[1]) in liste:
+			print "Deja dans la liste"
+		else:
+			liste.append(row[1])
+finally:
+	file.close()
+	print liste
+	
