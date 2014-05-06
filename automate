@@ -1,0 +1,54 @@
+
+#awk 'BEGIN { FS = "," } ; {print $2,$3,$6,$8,$9}' RDC.csv > tout.log 
+
+
+##################A MODIFIER ##############
+#A modifier pour script interactif date
+#Utiliser egrep entre deux expression
+
+
+egrep '2013-12-(1[0-9]|2[0-9]|30|31)' RDC.csv >> dated.log
+egrep '2014-(01|02)-(0[1-9]|1[0-9]|2[0-9]|3[0-1])' RDC.csv >> dated.log
+egrep '2014-03-(0[1-9]|1[0-2])' RDC.csv >> dated.log
+
+##################################################
+egrep '"Copie"' dated.log >> compute.log
+egrep '"Impression"' dated.log >> compute.log
+rm dated.log
+mv compute.log dated.log
+#rm -f tout.log
+
+
+
+awk 'BEGIN { FS = "," } ; {print $2,$3,$6,$8,$9}' dated.log > tout.log 
+awk 'BEGIN { FS = "," } ; {print $8}' dated.log > NB.log 
+#awk -F'[" "]' '{print $4}' dated.log > NB.log
+sed 1d NB.log > sededNB.log
+
+awk 'BEGIN { FS = "," } ; {print $9}' dated.log > couleur.log 
+
+#awk -F'[" "]' '{print $5}' dated.log > couleur.log
+sed 1d couleur.log > sedcouleur.log
+
+
+sed 's/"/ /g' sededNB.log > NB1.log
+sed 's/"/ /g' sedcouleur.log > couleur1.log
+#rm -f sededNB.log
+#rm -f sedcouleur.log
+
+awk 'BEGIN { FS = "," } ; {print $3,$8}' dated.log | grep PC_EASY_0172 | sed 's/"//g' | sed 's/PC_EASY_0172//g' | awk '{total+=$1}END{print total}'
+
+
+
+sed 's/N\/A/ /g' couleur1.log > couleur.log
+cat NB1.log | awk '{total+=$1}END{print total}'
+cat couleur1.log | awk '{total+=$1}END{print total}'
+rm -f NB1.log
+rm -f couleur.log
+rm -f sededNB.log
+rm -f sedcouleur.log
+#rm -f dated.log
+rm -f NB.log
+rm -f couleur1.log
+rm -f tout.log
+rm -f compute.log
