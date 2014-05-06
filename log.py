@@ -31,7 +31,7 @@ try:
 			couleur=couleur+int(row[4])
 		
 finally:
-	write.write("Impression nb =" + str(nb) +" Impression couleur = " + str(couleur))
+#	write.write("Impression nb =" + str(nb) +" Impression couleur = " + str(couleur))
 	file.close()
 	write.close()
 
@@ -40,10 +40,10 @@ liste = []
 try:
 	reader = csv.reader(file)
 	for row in reader:
-		if str(row[1]) in liste:
-			print "Deja dans la liste"
-		else:
+		if str(row[1]) not in liste:
 			liste.append(row[1])
+		else:
+			print "Deja dans la liste"
 finally:
 	file.close()
 	print liste
