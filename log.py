@@ -48,23 +48,26 @@ finally:
 	file.close()
 	print liste
 	
-file=open("final.csv","r")
+#file=open("final.csv","r")
 nb=0
 couleur=0
 try:
-	reader = csv.reader(file)
+	#reader = csv.reader(file)
 	for i in liste:
+		file=open("final.csv","r")
+		reader = csv.reader(file)
 		print nb,couleur
 		print i
 		nb=0
 		couleur=0
 		for row in reader:
 			if (i == row[1]):
-				print "OK"	
+			#	print "OK"	
 				nb=nb+int(row[3])
 				couleur=couleur+int(row[4])
-			else:
-				print "rien"
+		#	else:
+			#	print "rien"
 finally:
+	print nb,couleur
 	file.close()
 				
