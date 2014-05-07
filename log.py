@@ -42,16 +42,18 @@ try:
 	for row in reader:
 		if str(row[1]) not in liste:
 			liste.append(row[1])
-		else:
-			print "Deja dans la liste"
+#		else:
+#			print "Deja dans la liste"
 finally:
 	file.close()
-	print liste
+#	print liste
 	
 #file=open("final.csv","r")
 nb=0
 couleur=0
 rapport=open("Rapport.csv","w")
+totalnb=0
+totalcl=0
 try:
 	#reader = csv.reader(file)
 	for i in liste:
@@ -67,11 +69,14 @@ try:
 			#	print "OK"	
 				nb=nb+int(row[3])
 				couleur=couleur+int(row[4])
+				totalnb=totalnb+int(row[3])
+				totalcl=totalcl+int(row[4])
 		#	else:
 			#	print "rien"
 finally:
 #	print nb,couleur
 	rapport.write("Ordinateur : " + str(i) + " Noir et blanc : " + str(nb) + " couleur : " + str(couleur)+ "\n")
+	rapport.write(" Noir et blanc total : " + str(totalnb) + " Couleur : " + str(totalcl))
 	file.close()
 	rapport.close()
 	os.remove("test.csv")
