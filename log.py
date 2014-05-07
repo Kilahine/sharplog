@@ -51,13 +51,15 @@ finally:
 #file=open("final.csv","r")
 nb=0
 couleur=0
+rapport=open("Rapport.csv","w")
 try:
 	#reader = csv.reader(file)
 	for i in liste:
 		file=open("final.csv","r")
 		reader = csv.reader(file)
-		print nb,couleur
-		print i
+		rapport.write("Ordinateur : " + str(i) + " Noir et blanc : " + str(nb) + " couleur : " + str(couleur)+ "\n")
+	#	print nb,couleur
+	#	print i
 		nb=0
 		couleur=0
 		for row in reader:
@@ -68,6 +70,10 @@ try:
 		#	else:
 			#	print "rien"
 finally:
-	print nb,couleur
+#	print nb,couleur
+	rapport.write("Ordinateur : " + str(i) + " Noir et blanc : " + str(nb) + " couleur : " + str(couleur)+ "\n")
 	file.close()
+	rapport.close()
+	os.remove("test.csv")
+	os.remove("final.csv")
 				
