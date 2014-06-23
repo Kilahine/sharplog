@@ -69,6 +69,8 @@ couleur=0
 rapport=open("Rapport.csv","w")
 totalnb=0
 totalcl=0
+
+rapport.write("Ordinateur, Noir et Blanc, Couleurs \n")
 try:
 	#reader = csv.reader(file)
 	for i in liste:
@@ -87,13 +89,13 @@ try:
 				totalnb=totalnb+int(row[3])
 				totalcl=totalcl+int(row[4])
 					
-		rapport.write("Ordinateur : " + str(i) + " Noir et blanc : " + str(nb) + " couleur : " + str(couleur)+ "\n")
+		rapport.write(str(i) + ","  + str(nb) + "," + str(couleur)+ "\n")
 		#	else:
 			#	print "rien"
 finally:
 #	print nb,couleur
 #	rapport.write("Ordinateur : " + str(i) + " Noir et blanc : " + str(nb) + " couleur : " + str(couleur)+ "\n")
-	rapport.write(" Noir et blanc total : " + str(totalnb) + " Couleur : " + str(totalcl))
+	rapport.write("Noir et blanc total : " + str(totalnb) + " Couleur : " + str(totalcl))
 	file.close()
 	rapport.close()
 	os.remove("test.csv")
